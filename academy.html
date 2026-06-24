@@ -276,8 +276,8 @@
     <ul class="checklist">
       <li><span class="box"></span><span class="txt">Read the <b>Foundations</b> above.</span></li>
       <li><span class="box"></span><span class="txt"><b>Filter the Library</b> to your track and watch those sessions.</span></li>
-      <li><span class="box"></span><span class="txt"><b>Connect to Runlayer</b> &rarr; <a href="https://ecs.prod.runlayer.com">ecs.prod.runlayer.com</a></span></li>
-      <li><span class="box"></span><span class="txt"><b>Connect the Runlayer MCP</b> (<a href="https://ecs.prod.runlayer.com/servers/d0b2d0c6-5d87-4f87-a2e1-7f0a60a6c0b5">add it to your client</a>), then ask it: <em>&ldquo;What connectors and skills do I have available in Runlayer?&rdquo;</em></span></li>
+      <li><span class="box"></span><span class="txt"><b>Connect to Runlayer</b> &rarr; <a href="https://ecs.prod.runlayer.com" target="_blank" rel="noopener">ecs.prod.runlayer.com</a></span></li>
+      <li><span class="box"></span><span class="txt"><b>Connect the Runlayer MCP</b> (<a href="https://ecs.prod.runlayer.com/servers/d0b2d0c6-5d87-4f87-a2e1-7f0a60a6c0b5" target="_blank" rel="noopener">add it to your client</a>), then ask it: <em>&ldquo;What connectors and skills do I have available in Runlayer?&rdquo;</em></span></li>
       <li><span class="box"></span><span class="txt">Stuck? Ask your <b>Onboarding Buddy</b> agent, or post in <b>#wg-onboarding-team</b>. Over-communicate &gt; under-communicate.</span></li>
     </ul>
   </div>
@@ -400,31 +400,12 @@ function cardHTML(s){
   </article>`;
 }
 
-// Open external links in a new tab. Inside the artifact iframe a scripted
-// window.open is often blocked, so synthesize an anchor click with target=_blank.
-function openExternal(url){
-  if(!url) return;
-  const a = document.createElement("a");
-  a.href = url;
-  a.target = "_blank";
-  a.rel = "noopener noreferrer";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-
+// Native <a target="_blank"> handle the watch links. For clicks elsewhere on a
+// card (not on a link or the takeaways toggle), open the recording in a new tab.
 gallery.addEventListener("click", e=>{
   if(e.target.closest("a") || e.target.closest("details")) return;
   const card = e.target.closest(".card");
-  if(card && card.dataset.rec){ e.preventDefault(); openExternal(card.dataset.rec); }
-});
-
-// Route real clicks on external links through the new-tab opener.
-// Ignore synthetic clicks (isTrusted === false) to avoid recursion.
-document.addEventListener("click", e=>{
-  if(!e.isTrusted) return;
-  const a = e.target.closest('a[href^="http"]');
-  if(a){ e.preventDefault(); openExternal(a.href); }
+  if(card && card.dataset.rec){ window.open(card.dataset.rec, "_blank", "noopener"); }
 });
 
 // Two role tracks. Company & Strategy sessions are foundational -> shown in both.
