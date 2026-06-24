@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Runlayer Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@300..700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand-black:#000000;
+    --brand-white:#fdfdfd;
+    --accent:#000000;
+    --accent-soft:#F5F5F4;
+    --accent-line:#E7E5E4;
+    --stone-900:#1C1917;
+    --stone-800:#292524;
+    --stone-700:#44403C;
+    --stone-600:#57534E;
+    --stone-500:#78716C;
+    --stone-400:#A8A29E;
+    --stone-300:#D6D3D1;
+    --stone-200:#E7E5E4;
+    --stone-100:#F5F5F4;
+    --stone-50:#FAFAF9;
+    --c-company:#7C6BF0;     /* blue track */
+    --c-gtm:#10B981;         /* green track */
+    --c-product:#C24EF5;     /* purple track */
+    --radius:14px;
+    --shadow-card:0 1px 2px rgba(28,25,23,.06), 0 8px 24px -12px rgba(28,25,23,.18);
+    --shadow-card-hover:0 2px 4px rgba(28,25,23,.08), 0 18px 40px -16px rgba(28,25,23,.32);
+    --font-sans:"Geist", system-ui, -apple-system, sans-serif;
+    --font-mono:"Geist Mono", monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--font-sans);
+    color:var(--stone-800);
+    background:var(--brand-white);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+    font-size:15px;
+  }
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- Hero (brand-black, no violet) ---------- */
+  .hero{
+    background:var(--brand-black);
+    color:var(--brand-white);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .logo{display:flex;align-items:center;gap:12px;color:var(--brand-white)}
+  .rl-logo{height:23px;width:auto;display:block}
+  .acad{font-weight:500;font-size:14px;opacity:.6;letter-spacing:-.01em;padding-left:12px;border-left:1px solid rgba(255,255,255,.22)}
+  .nav-links{display:flex;gap:26px;font-size:13.5px;color:rgba(253,253,253,.62)}
+  .nav-links a{text-decoration:none;transition:color .15s}
+  .nav-links a:hover{color:var(--brand-white)}
+  .hero-inner{padding:64px 0 76px;max-width:760px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone-400);border:1px solid rgba(255,255,255,.14);padding:6px 12px;border-radius:999px;margin-bottom:26px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#34D399;box-shadow:0 0 0 3px rgba(52,211,153,.18)}
+  h1{font-size:clamp(40px,6vw,64px);line-height:1.02;letter-spacing:-.03em;margin:0 0 18px;font-weight:600}
+  .hero p{font-size:18px;color:rgba(253,253,253,.72);margin:0 0 32px;max-width:620px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:500;text-decoration:none;transition:transform .12s, background .15s, box-shadow .15s;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:var(--brand-white);color:var(--stone-900)}
+  .btn-primary:hover{transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--brand-white);border-color:rgba(255,255,255,.18)}
+  .btn-ghost:hover{background:rgba(255,255,255,.06)}
+
+  /* ---------- Sections ---------- */
+  section{padding:72px 0}
+  .section-head{max-width:680px;margin-bottom:36px}
+  .kicker{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:12px}
+  h2{font-size:clamp(26px,3.4vw,34px);letter-spacing:-.02em;margin:0 0 12px;font-weight:600;color:var(--stone-900)}
+  .section-head p{font-size:16px;color:var(--stone-600);margin:0}
+  .divider{height:1px;background:var(--stone-200);max-width:1120px;margin:0 auto}
+
+  /* ---------- Start here steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--stone-50);border:1px solid var(--stone-200);border-radius:var(--radius);padding:24px}
+  .step .num{font-family:var(--font-mono);font-size:13px;color:var(--accent);font-weight:600;margin-bottom:14px;display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:var(--accent-soft);border:1px solid var(--accent-line)}
+  .step h3{margin:0 0 6px;font-size:16px;color:var(--stone-900);font-weight:600}
+  .step p{margin:0;font-size:14px;color:var(--stone-600)}
+
+  /* ---------- Foundations ---------- */
+  .foundations-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+  .callout{border:1px solid var(--stone-200);background:var(--brand-white);border-radius:14px;padding:20px 22px;box-shadow:0 1px 2px rgba(28,25,23,.04);transition:border-color .15s, box-shadow .15s}
+  .callout:hover{border-color:var(--stone-300);box-shadow:var(--shadow-card)}
+  .callout.primary{border-color:var(--accent-line);background:var(--accent-soft);box-shadow:none}
+  .callout.primary:hover{border-color:var(--accent);box-shadow:none}
+  .callout h3{margin:0 0 7px;font-size:16px;color:var(--stone-900);font-weight:600;display:flex;align-items:center;gap:9px}
+  .callout p{margin:0;font-size:14.5px;color:var(--stone-700)}
+  .callout .acc{width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none}
+  .callout.gray .acc{background:var(--stone-400)}
+  .feature-list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .feature-list li{display:flex;gap:12px;font-size:14.5px;color:var(--stone-700)}
+  .feature-list li b{color:var(--stone-900);font-weight:600}
+  .feature-list .ic{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:8px}
+
+  /* ---------- Library / filters ---------- */
+  .track-step{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+  .track-step-label{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--stone-900);letter-spacing:-.01em}
+  .track-step-num{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);font-family:var(--font-mono);font-size:11px;font-weight:600}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:13px;padding:8px 16px;border-radius:999px;border:1px solid var(--stone-300);background:var(--brand-white);color:var(--stone-600);cursor:pointer;transition:all .15s;font-family:inherit}
+  .chip:hover{border-color:var(--stone-400);color:var(--stone-900)}
+  .chip.active{background:var(--stone-900);color:var(--brand-white);border-color:var(--stone-900)}
+  .chip .count{opacity:.55;margin-left:6px;font-family:var(--font-mono);font-size:11px}
+
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{border:1px solid var(--stone-200);border-radius:var(--radius);overflow:hidden;background:var(--brand-white);box-shadow:var(--shadow-card);display:flex;flex-direction:column;transition:transform .16s, box-shadow .16s, border-color .16s;cursor:pointer}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-card-hover);border-color:var(--stone-300)}
+  .thumb{position:relative;aspect-ratio:16/9;background:var(--brand-black);overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb .order{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:11px;font-weight:600;color:#fff;background:rgba(27,12,39,.6);backdrop-filter:blur(6px);padding:3px 8px;border-radius:7px;border:1px solid rgba(255,255,255,.14)}
+  .badge{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:#fff;background:rgba(27,12,39,.62);backdrop-filter:blur(6px);padding:4px 9px 4px 5px;border-radius:999px;border:1px solid rgba(255,255,255,.14)}
+  .badge img{width:16px;height:16px;border-radius:4px;display:block}
+  .card-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1}
+  .track-tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+  .card h3{margin:0 0 10px;font-size:16.5px;line-height:1.25;color:var(--stone-900);letter-spacing:-.01em}
+  .tldr{font-size:13.5px;color:var(--stone-600);margin:0 0 14px;flex:1}
+  details.takeaways{margin:0 0 14px;border-top:1px solid var(--stone-200);padding-top:12px}
+  details.takeaways summary{font-size:12.5px;font-weight:600;color:var(--stone-700);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+  details.takeaways summary::-webkit-details-marker{display:none}
+  details.takeaways summary .arw{transition:transform .15s;color:var(--stone-400)}
+  details.takeaways[open] summary .arw{transform:rotate(90deg)}
+  details.takeaways ul{margin:12px 0 0;padding:0 0 0 2px;list-style:none;display:grid;gap:9px}
+  details.takeaways li{font-size:13px;color:var(--stone-600);display:flex;gap:9px;line-height:1.45}
+  details.takeaways li .ic{flex:none;width:6px;height:6px;border-radius:50%;margin-top:7px}
+  .blocked{font-size:12.5px;color:var(--stone-500);background:#FFFBEB;border:1px solid #FDE68A;border-radius:9px;padding:10px 12px;margin:0 0 14px;display:flex;gap:8px}
+  .watch{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;margin-top:auto}
+  .watch:hover{color:var(--accent)}
+  .watch .play{width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px}
+  .ts{font-family:var(--font-mono);font-size:11px;color:var(--stone-400);margin-left:4px;font-weight:400}
+
+  /* ---------- Next steps ---------- */
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:760px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--stone-700);background:var(--stone-50);border:1px solid var(--stone-200);border-radius:11px;padding:14px 16px;cursor:pointer;user-select:none;transition:background .15s, border-color .15s}
+  .checklist li:hover{border-color:var(--stone-300)}
+  .checklist .box{flex:none;width:18px;height:18px;border:2px solid var(--stone-300);border-radius:5px;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .checklist li.checked{color:var(--stone-500)}
+  .checklist li.checked .box{background:var(--accent);border-color:var(--accent)}
+  .checklist li.checked .box::after{content:"\2713";color:#fff;font-size:12px;font-weight:700;line-height:1}
+  .checklist li.checked .txt{text-decoration:line-through;text-decoration-color:var(--stone-400)}
+  .checklist a{color:var(--accent);text-decoration:none;font-weight:500}
+  .checklist a:hover{text-decoration:underline}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--brand-black);color:rgba(253,253,253,.6);padding:40px 0;margin-top:24px}
+  footer .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px}
+  footer .logo{color:var(--brand-white)}
+  footer .credit{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:rgba(253,253,253,.62)}
+  footer .credit .heart{color:var(--brand-white)}
+
+  @media(max-width:860px){
+    .steps,.gallery,.foundations-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .hero-inner{padding:48px 0 56px}
+  }
+  @media(max-width:560px){
+    .gallery{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav">
+      <div class="logo"><span id="navLogo"></span><span class="acad">Academy</span></div>
+      <div class="nav-links">
+        <a href="#foundations">Foundations</a>
+        <a href="#library">Learning Library</a>
+        <a href="#next">Next Steps</a>
+      </div>
+    </nav>
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="dot"></span> The home for ramping up at Runlayer</span>
+      <h1>Runlayer Academy</h1>
+      <p>One place to learn the foundations, watch the offsite sessions for your role, and ship. The golden path from day one to fully ramped.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#library">Browse the Learning Library</a>
+        <a class="btn btn-ghost" href="#foundations">Start with Foundations</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- START HERE -->
+<section id="start">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Start here</div>
+      <h2>Three steps to ramp, in order</h2>
+      <p>Your personalized onboarding page and Onboarding Buddy agent are created for you by the Onboarding Factory. This hub is the shared, evergreen layer underneath them.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">1</span><h3>Learn the Foundations</h3><p>What Runlayer is, the product, the security model, and how we work. ~20 min read.</p></div>
+      <div class="step"><span class="num">2</span><h3>Watch your track</h3><p>Filter the Learning Library to your role and watch those offsite sessions.</p></div>
+      <div class="step"><span class="num">3</span><h3>Ship &amp; connect</h3><p>Connect the Runlayer MCP to your AI client and start building on day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOUNDATIONS -->
+<section id="foundations">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Foundations</div>
+      <h2>What is Runlayer</h2>
+      <p>One platform, one golden path to enable and control every MCP, Skill, and Agent.</p>
+    </div>
+    <div class="foundations-grid">
+      <div>
+        <div class="callout primary">
+          <h3><span class="acc"></span>Product 101</h3>
+          <p>Runlayer is an AI infrastructure platform with security built in, not a bolt-on tool.</p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="ic"></span><span><b>MCP &amp; connectors</b>: governed access to tools, enforced by policies and deterministic guardrails.</span></li>
+          <li><span class="ic"></span><span><b>Agent Sessions</b>: real-time visibility + audit of every agent action; intent-drift detection.</span></li>
+          <li><span class="ic"></span><span><b>Security scanning</b>: ML models on GPUs catch prompt injection and leaked tokens in real time.</span></li>
+          <li><span class="ic"></span><span><b>Agent Accounts</b>: scoped non-human identities with delegation (RFC 8693 token exchange).</span></li>
+          <li><span class="ic"></span><span><b>Runlayer Deploy</b>: host custom MCP servers via CLI + <code>runlayer</code> YAML &rarr; ECS Fargate / K8s.</span></li>
+          <li><span class="ic"></span><span><b>Skills &amp; Plugins</b>: distributable capabilities (plugins are being unified into connectors).</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout gray" style="margin-bottom:18px">
+          <h3><span class="acc"></span>How we work</h3>
+          <p>Builder culture: <b>direct, no fluff, over-communicate</b>. Ship early and iterate. Customer obsession (~5-min Slack response). Spec-driven, pod-based.</p>
+        </div>
+        <div class="callout">
+          <h3><span class="acc"></span>The golden path</h3>
+          <p>We don't sell a platform. We take customers from where they are to AI-native as fast as possible. The same path runs your onboarding.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LIBRARY -->
+<section id="library">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Offsite Learning Library</div>
+      <h2>Recorded at the June 2026 NYC Offsite</h2>
+      <p>Pick your track to see the sessions for your role. <b>EPD</b> (Eng / Product / Design) and <b>GTM</b> (Go-to-market) each have their own playlist, and the foundational Company &amp; Strategy sessions show in both. Expand a card for the TLDR + takeaways, then <b>click the card</b> to watch. Recordings jump straight to where the talk starts.</p>
+    </div>
+    <div class="track-step">
+      <span class="track-step-label"><span class="track-step-num">1</span> Select your track</span>
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NEXT STEPS -->
+<section id="next">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Your next steps</div>
+      <h2>Get to your first ship</h2>
+    </div>
+    <ul class="checklist">
+      <li><span class="box"></span><span class="txt">Read the <b>Foundations</b> above.</span></li>
+      <li><span class="box"></span><span class="txt"><b>Filter the Library</b> to your track and watch those sessions.</span></li>
+      <li><span class="box"></span><span class="txt"><b>Connect to Runlayer</b> &rarr; <a href="https://ecs.prod.runlayer.com">ecs.prod.runlayer.com</a></span></li>
+      <li><span class="box"></span><span class="txt"><b>Connect the Runlayer MCP</b> (<a href="https://ecs.prod.runlayer.com/servers/d0b2d0c6-5d87-4f87-a2e1-7f0a60a6c0b5">add it to your client</a>), then ask it: <em>&ldquo;What connectors and skills do I have available in Runlayer?&rdquo;</em></span></li>
+      <li><span class="box"></span><span class="txt">Stuck? Ask your <b>Onboarding Buddy</b> agent, or post in <b>#wg-onboarding-team</b>. Over-communicate &gt; under-communicate.</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><span id="footLogo"></span><span class="acad">Academy</span></div>
+    <div class="credit">Built with <span class="heart">&#129293;</span> by Tal's agents</div>
+  </div>
+</footer>
+
+<script>
+const RAW = "https://raw.githubusercontent.com/talperetz/offsite-talks/main/";
+const TRACKS = {
+  "Company & Strategy": {key:"company", color:"var(--c-company)", icon:"icons/icon-company.png"},
+  "GTM & Customer":     {key:"gtm",     color:"var(--c-gtm)",     icon:"icons/icon-gtm.png"},
+  "Product & Eng":      {key:"product", color:"var(--c-product)", icon:"icons/icon-product.png"}
+};
+
+const SESSIONS = [
+  {order:1, title:"Runlayer Product Roadmap", track:"Company & Strategy", thumb:"thumbnails/thumb-roadmap.png",
+   rec:"https://app.fireflies.ai/view/01KT2T7K2HEMZG0EZZZ0SCHE3G?t=139.11", ts:"2:19",
+   tldr:"6 months in: 50+ projects and ~3,000 PRs shipped. Next bets are a unified control plane across the agent lifecycle, a self-improving Agent Factory, and cost optimization via model auto-routing.",
+   takeaways:["6 months of velocity: 50+ projects shipped, ~3,000 PRs merged; roadmap driven by continuous customer feedback.","Differentiation = control + security, enterprise-ready; guide customers along their AI journey to grow ROI + adoption.","Big bets: control plane, Agent Factory (auto skill-mapping, self-improving agents), incidents, cost optimization, multi-cloud scale."]},
+
+  {order:2, title:"The Runbook for Enterprise AI Transformation", track:"Company & Strategy", thumb:"thumbnails/thumb-runbook.png",
+   rec:"https://app.fireflies.ai/view/01KT2T7K2GPZ737K9YF5CM0ZBJ?t=720", ts:"12:00",
+   tldr:"Selling AI-enablement + security together jumps deals from $100K to $500K+. Discovery maps the customer's AI-maturity \u201Cgolden path,\u201D and POCs are ~75% theater to build excitement and hand champions board-ready docs.",
+   takeaways:["Sell to two personas together: AI enablers + security; dual-persona deals scale from $100K to $500K+.","New discovery maps the customer's AI journey / maturity, not just security tooling.","POCs are ~75% demo/theater to create excitement; editable board-ready strategy docs turn champions into heroes."]},
+
+  {order:3, title:"Lessons from Selling Runlayer", track:"Company & Strategy", thumb:"thumbnails/thumb-lessons-selling.png",
+   rec:"https://app.fireflies.ai/view/01KTPKTMF8X5D2WZYG3M4K81GZ", ts:null,
+   tldr:"Position Runlayer as AI infrastructure with security built in (not a bolt-on tool). Sell enterprise-wide (CISO + AI lead + CTO) and let consumption pricing unlock the large deals.",
+   takeaways:["Runlayer is an AI infrastructure platform with security built in, not a bolt-on security tool.","Core security: shadow-AI detection, GPU ML scanning, deterministic guardrails, Agent Sessions for audit.","Sell enterprise-wide: CISO + AI transformation lead + CTO; consumption pricing unlocks large deals."]},
+
+  {order:4, title:"Surprise Guest AMA", track:"Company & Strategy", thumb:"thumbnails/thumb-surprise-ama.png",
+   rec:"https://app.fireflies.ai/view/01KTRZBTY9S5A9MBD3EZ7K61N1?t=720", ts:"12:00",
+   tldr:"Hire people who already have the traits (paranoid, driven); culture amplifies them and wrong hires are the #1 startup risk. Velocity at scale wins both markets and talent; chase global logo acquisition over short-term revenue efficiency.",
+   takeaways:["Hire people who already have the traits (paranoid, driven); culture amplifies them; wrong hires are the #1 startup risk.","Product velocity at scale (Ramp) both wins markets and attracts top talent.","GTM: prioritize global logo acquisition over short-term revenue efficiency; real PMF shows in adoption."]},
+
+  {order:5, title:"Running Successful Onboarding & POCs", track:"GTM & Customer", thumb:"thumbnails/thumb-onboarding-pocs.png",
+   rec:"https://app.fireflies.ai/view/01KT2T7K2H6X0F7CWP6M9V6RPX?t=693", ts:"11:33",
+   tldr:"Keep POCs \u22642 weeks against a written success-criteria doc. Connect the Runlayer MCP first for a fast win, run agents live for the \u201Cwow,\u201D and make weekly check-ins + Slack escalation non-negotiable.",
+   takeaways:["Balance structure vs velocity: aim for \u22642-week POCs; always start with a success-criteria doc.","Connect the Runlayer MCP first as the quick win; run agents live to create the \u201Cwow.\u201D","Weekly check-ins are mandatory; Slack + escalation automation keep momentum; run security review in parallel."]},
+
+  {order:6, title:"Understanding Product Usage", track:"GTM & Customer", thumb:"thumbnails/thumb-product-usage.png",
+   rec:"https://app.fireflies.ai/view/01KTVRPGKGJG9DSNP2VBZTN859?t=470", ts:"7:50",
+   tldr:"Customers climb an AI-adoption ladder (none \u2192 chatbots \u2192 plugins \u2192 autonomous agents), and the Customer Session V2 dashboard shows most are still early. Onboarding is the make-or-break funnel, so automate it.",
+   takeaways:["Track customers along the AI adoption spectrum: no AI \u2192 chatbots \u2192 plugins \u2192 autonomous agents.","The Customer Session V2 dashboard shows funnel stages; most customers are early = big headroom.","Onboarding is the make-or-break funnel, so automate it. Instrumentation is metadata-only (~75% coverage), privacy-bound."]},
+
+  {order:7, title:"Legal Do's & Don'ts", track:"GTM & Customer", thumb:"thumbnails/thumb-legal.png",
+   rec:"https://app.fireflies.ai/view/01KTPTSYSEFW5Q0M6X6RS0NH9M", ts:null,
+   tldr:"Lead with Runlayer's own MSA/DPA (hours vs days on customer paper). Liability caps must track insurance (~2-3x ARR) and unlimited is a hard no; speed reviews with consistent subject lines + deal context.",
+   takeaways:["Use Runlayer's own MSA/DPA templates; customer paper is slow and risky (hours vs days+).","Liability caps must align with insurance (~2-3x ARR); unlimited liability is a no.","Speed legal: consistent email subjects (customer / doc / version) + deal context; pre-check commercial terms."]},
+
+  {order:8, title:"Debugging & Fixing Customer Issues", track:"GTM & Customer", thumb:"thumbnails/thumb-debugging.png",
+   rec:"https://app.fireflies.ai/view/01KT2T7K2JM2QS66VD4PXEF3M9", ts:null, blocked:true,
+   tldr:"Support playbook. AI summary unavailable, blocked by Runlayer's output security scan. Watch the raw recording."},
+
+  {order:9, title:"Agents", track:"Product & Eng", thumb:"thumbnails/thumb-agents.png",
+   rec:"https://app.fireflies.ai/view/01KT2T7K2G90JADH25HPFYBM4M", ts:null, blocked:true,
+   tldr:"Building and running agents on Runlayer. AI summary unavailable, blocked by Runlayer's output security scan. Watch the raw recording."},
+
+  {order:10, title:"Runlayer Deploy", track:"Product & Eng", thumb:"thumbnails/thumb-deploy.png",
+   rec:"https://app.fireflies.ai/view/01KT7Z4MS53XDW4DZ7KX75DEM6?t=564", ts:"9:24",
+   tldr:"Runlayer Deploy is MCP hosting: a CLI + runlayer YAML builds a Docker image and ships it via Terraform to ECS Fargate (or K8s). Secure by default: authenticated proxy only, strict path exposure, per-deployment network isolation.",
+   takeaways:["RLD = MCP hosting: CLI + runlayer YAML builds a Docker image, deployed via Terraform \u2192 ECS Fargate (K8s alt).","Secure by default: MCP paths only via authenticated proxy, strict path exposure, network isolation between deployments.","Roadmap: one-connector-per-deployment, staged rollouts, centralized secret management in the proxy."]},
+
+  {order:11, title:"Hooks & Sessions", track:"Product & Eng", thumb:"thumbnails/thumb-hooks-sessions.png",
+   rec:"https://app.fireflies.ai/view/01KT5CK8218TC86MMD4AWNT24X?t=207", ts:"3:27",
+   tldr:"Lifecycle / pre-tool / post-tool / reasoning hooks give real-time visibility into every agent action (~40k sessions/week), already catching zero-days like the Zoom token leak and Vercel env copying. TS/Python SDKs + a Chrome extension extend it; post-LLM output blocking is the remaining gap.",
+   takeaways:["Sessions give full real-time visibility into agent activity (lifecycle / pre-tool / post-tool / reasoning hooks).","Real impact: caught zero-days (Zoom token leak, Vercel env copying); ~40k sessions/week; intent-drift detection.","TS + Python SDKs + a Chrome extension extend enforcement; post-LLM output blocking is still a known gap."]},
+
+  {order:12, title:"Agent Accounts", track:"Product & Eng", thumb:"thumbnails/thumb-agent-accounts.png",
+   rec:"https://app.fireflies.ai/view/01KT5CK8260AF14RA4R2HAR1FW?t=180", ts:"3:00",
+   tldr:"Agent accounts replace long-lived keys and over-broad service accounts with scoped non-human identities. Delegation uses RFC 8693 token exchange, with each agent's policy always a subset of the user's (least privilege per request).",
+   takeaways:["Agent accounts = scoped non-human identities; avoid long-lived API keys / over-broad service accounts.","Delegation via RFC 8693 token exchange; agent policy is always a subset of the user's (least privilege).","Dynamic vs static session grants + multi-account token sharing; respects upstream perms (Jira / GitHub)."]},
+
+  {order:13, title:"MDM", track:"Product & Eng", thumb:"thumbnails/thumb-mdm.png",
+   rec:"https://app.fireflies.ai/view/01KT5CK825N8JJP49CZZEY7F0T", ts:null, blocked:true,
+   tldr:"Endpoint deployment & shadow-AI detection. AI summary unavailable, blocked by Runlayer's output security scan. Watch the raw recording."},
+
+  {order:14, title:"Design for Coders", track:"Product & Eng", thumb:"thumbnails/thumb-design-coders.png",
+   rec:"https://app.fireflies.ai/view/01KT5CK825BM9FF0WD9J4H5ZD4?t=463", ts:"7:43",
+   tldr:"Non-designers ship quality UI by defining the problem, reusing patterns (Mobbin \u2192 existing components), and refining every state (empty/error/loading), not reinventing. Don't let design be the bottleneck; ping design on Slack.",
+   takeaways:["Non-designers ship quality UI by defining the problem, reusing patterns, and simplifying, not reinventing.","Workflow: goal \u2192 find examples (Mobbin) \u2192 reuse components \u2192 refine all states \u2192 ship \u2192 iterate.","Don't let design be a bottleneck; ping design on Slack; a unified design-skill library is coming."]},
+
+  {order:15, title:"Future of Runlayer Plugin", track:"Product & Eng", thumb:"thumbnails/thumb-future-plugin.png",
+   rec:"https://app.fireflies.ai/view/01KTCBSBCCZHHBJAC0WX4ZVEKT", ts:null,
+   tldr:"Kill \u201Cplugins\u201D as a separate concept since they confuse customers; unify under one Runlayer MCP / omni connector, pushed via MDM and governed by policy. Virtual MCP servers can prepackage skills/connectors per team.",
+   takeaways:["Kill \u201Cplugins\u201D as a separate concept; they confuse customers; unify under Runlayer MCP / one omni connector.","Admin-driven onboarding: push a single connector via MDM, control access with policies.","Virtual MCP servers can prepackage skills/connectors per team; needs IA + branding + UI cleanup."]}
+];
+
+const gallery = document.getElementById("gallery");
+const filters = document.getElementById("filters");
+
+function cardHTML(s){
+  const tr = TRACKS[s.track];
+  const body = s.blocked
+    ? `<div class="blocked">&#9888;&#65039; ${s.tldr}</div>`
+    : `<p class="tldr">${s.tldr}</p>
+       <details class="takeaways">
+         <summary><span class="arw">&#9656;</span> Key takeaways</summary>
+         <ul>${s.takeaways.map(t=>`<li><span class="ic" style="background:${tr.color}"></span><span>${t}</span></li>`).join("")}</ul>
+       </details>`;
+  const tsLabel = s.ts ? `<span class="ts">from ${s.ts}</span>` : "";
+  return `<article class="card" data-track="${tr.key}" data-rec="${s.rec}">
+    <div class="thumb">
+      <img loading="lazy" src="${RAW+s.thumb}" alt="${s.title}">
+      <span class="order">${String(s.order).padStart(2,"0")}</span>
+      <span class="badge"><img src="${RAW+tr.icon}" alt="">${s.track}</span>
+    </div>
+    <div class="card-body">
+      <div class="track-tag" style="color:${tr.color}">${s.track}</div>
+      <h3>${s.title}</h3>
+      ${body}
+      <a class="watch" href="${s.rec}" target="_blank" rel="noopener"><span class="play">&#9654;</span> Watch the recording ${tsLabel}</a>
+    </div>
+  </article>`;
+}
+
+// Open external links in a new tab. Inside the artifact iframe a scripted
+// window.open is often blocked, so synthesize an anchor click with target=_blank.
+function openExternal(url){
+  if(!url) return;
+  const a = document.createElement("a");
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+gallery.addEventListener("click", e=>{
+  if(e.target.closest("a") || e.target.closest("details")) return;
+  const card = e.target.closest(".card");
+  if(card && card.dataset.rec){ e.preventDefault(); openExternal(card.dataset.rec); }
+});
+
+// Route real clicks on external links through the new-tab opener.
+// Ignore synthetic clicks (isTrusted === false) to avoid recursion.
+document.addEventListener("click", e=>{
+  if(!e.isTrusted) return;
+  const a = e.target.closest('a[href^="http"]');
+  if(a){ e.preventDefault(); openExternal(a.href); }
+});
+
+// Two role tracks. Company & Strategy sessions are foundational -> shown in both.
+function tracksFor(s){
+  switch(s.track){
+    case "Company & Strategy": return ["epd","gtm"];
+    case "Product & Eng":      return ["epd"];
+    case "GTM & Customer":     return ["gtm"];
+    default: return [];
+  }
+}
+
+function render(filter){
+  const list = SESSIONS.filter(s=>tracksFor(s).includes(filter));
+  gallery.innerHTML = list.map(cardHTML).join("");
+}
+
+const filterDefs = [
+  {key:"epd", label:"EPD"},
+  {key:"gtm", label:"GTM"}
+];
+const counts = {};
+filterDefs.forEach(f=>counts[f.key]=SESSIONS.filter(s=>tracksFor(s).includes(f.key)).length);
+filters.innerHTML = filterDefs.map((f,i)=>`<button class="chip${i===0?' active':''}" data-f="${f.key}">${f.label}<span class="count">${counts[f.key]}</span></button>`).join("");
+filters.addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  filters.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+  b.classList.add("active");
+  render(b.dataset.f);
+});
+
+render(filterDefs[0].key);
+
+const LOGO_SVG = `<svg class="rl-logo" viewBox="0 0 108 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Runlayer"><path d="M12.9395 18.4399C13.0278 18.4399 13.0996 18.5116 13.0996 18.6V26.4C13.0996 26.4884 13.0278 26.5602 12.9395 26.5602H11.3801C11.2917 26.5602 11.2199 26.4884 11.2199 26.4V18.6C11.2199 18.5116 11.2917 18.4399 11.3801 18.4399H12.9395ZM9.76992 17.1274C9.81236 17.1274 9.8532 17.1442 9.8832 17.1742L10.9863 18.2774C11.0486 18.3398 11.0486 18.4407 10.9863 18.5031L5.4707 24.0188C5.40829 24.0811 5.30739 24.081 5.24492 24.0188L4.1418 22.9156C4.11179 22.8856 4.09492 22.8448 4.09492 22.8024C4.09495 22.76 4.11182 22.7191 4.1418 22.6891L9.65664 17.1742L9.68164 17.1539C9.70765 17.1366 9.73824 17.1274 9.76992 17.1274ZM9.55977 15.0602C9.64813 15.0602 9.71992 15.132 9.71992 15.2203V16.7797C9.71992 16.8221 9.70296 16.863 9.67305 16.893C9.64304 16.923 9.6022 16.9399 9.55977 16.9399H1.75977C1.6714 16.9399 1.59961 16.8681 1.59961 16.7797V15.2203C1.59961 15.178 1.61658 15.137 1.64648 15.107C1.67649 15.077 1.71733 15.0602 1.75977 15.0602H9.55977ZM22.5598 15.0602C22.6481 15.0602 22.7199 15.132 22.7199 15.2203V16.7797C22.7199 16.8221 22.703 16.863 22.673 16.893C22.643 16.923 22.6022 16.9399 22.5598 16.9399H11.3801C11.2917 16.9399 11.2199 16.8681 11.2199 16.7797V15.2203C11.2199 15.1779 11.2368 15.137 11.2668 15.107C11.2968 15.077 11.3376 15.0602 11.3801 15.0602H22.5598ZM5.24414 7.98126C5.30659 7.91881 5.40821 7.91887 5.4707 7.98126L10.9863 13.4969C11.0163 13.5269 11.0332 13.5678 11.0332 13.6102C11.0332 13.6525 11.0163 13.6935 10.9863 13.7234L9.8832 14.8266C9.82074 14.8889 9.7191 14.8889 9.65664 14.8266L4.14102 9.31094C4.07866 9.24848 4.07865 9.14684 4.14102 9.08438L5.24414 7.98126ZM12.9395 5.43985C13.0278 5.43985 13.0996 5.51164 13.0996 5.60001V13.4C13.0996 13.4884 13.0278 13.5602 12.9395 13.5602H11.3801C11.2917 13.5602 11.2199 13.4884 11.2199 13.4V5.60001C11.2199 5.55757 11.2368 5.51673 11.2668 5.48672C11.2968 5.45682 11.3377 5.43985 11.3801 5.43985H12.9395Z" fill="currentColor"/><path d="M15.7659 18.3667C15.7359 18.3369 15.695 18.3198 15.6526 18.3198H13.4464C13.3818 18.32 13.3235 18.3594 13.2987 18.4191C13.2741 18.4788 13.2882 18.5475 13.3339 18.5933L18.8487 24.1089C18.8787 24.1389 18.9197 24.1557 18.962 24.1558C19.0044 24.1558 19.0453 24.1388 19.0753 24.1089L20.1784 23.0058C20.2409 22.9433 20.2409 22.8417 20.1784 22.7792L15.7659 18.3667Z" fill="currentColor"/><path d="M19.0755 7.80646C19.0208 7.75203 18.9367 7.74533 18.8747 7.78615L18.8497 7.80646L13.334 13.3221C13.2884 13.3678 13.2743 13.4366 13.2989 13.4963C13.3237 13.5561 13.3826 13.5955 13.4473 13.5955H15.6536C15.6958 13.5954 15.7362 13.5784 15.7661 13.5487L20.1786 9.13615C20.2086 9.10615 20.2255 9.06531 20.2255 9.02287C20.2254 8.98046 20.2086 8.93958 20.1786 8.90959L19.0755 7.80646Z" fill="currentColor"/><path d="M31.7168 23V8.625H36.8535C37.9668 8.625 38.8913 8.81706 39.627 9.20117C40.3626 9.58529 40.9128 10.1159 41.2773 10.793C41.6419 11.4635 41.8242 12.2448 41.8242 13.1367C41.8242 14.0156 41.6387 14.7871 41.2676 15.4512C40.903 16.1152 40.3529 16.6328 39.6172 17.0039C38.8815 17.3685 37.957 17.5508 36.8438 17.5508H32.957V15.6953H36.6387C37.3483 15.6953 37.9212 15.5944 38.3574 15.3926C38.8001 15.1908 39.1257 14.901 39.334 14.5234C39.5423 14.1393 39.6432 13.6771 39.6367 13.1367C39.6432 12.5898 39.5423 12.1178 39.334 11.7207C39.1257 11.3236 38.8001 11.0176 38.3574 10.8027C37.9147 10.5879 37.3353 10.4805 36.6191 10.4805H33.8945V23H31.7168ZM38.8262 16.5059L42.3809 23H39.9004L36.4238 16.5059H38.8262ZM50.2523 18.6445V12.6875H52.3422V23H50.3109V21.2617H50.2719C50.044 21.7956 49.6697 22.2448 49.1488 22.6094C48.6345 22.974 47.9737 23.1562 47.1664 23.1562C46.4633 23.1562 45.8188 23.0033 45.2328 22.6973C44.6469 22.3913 44.1781 21.9355 43.8266 21.3301C43.4815 20.7246 43.309 19.9792 43.309 19.0938V12.6875H45.4086V18.8398C45.4086 19.6602 45.6234 20.2819 46.0531 20.7051C46.4828 21.1283 47.0525 21.3398 47.7621 21.3398C48.2309 21.3398 48.6508 21.2454 49.0219 21.0566C49.3995 20.8678 49.699 20.5749 49.9203 20.1777C50.1417 19.7741 50.2523 19.263 50.2523 18.6445ZM56.0438 17.043V23H53.9441V12.6875H55.9852V14.4258H56.0242C56.2521 13.8854 56.6232 13.4362 57.1375 13.0781C57.6518 12.7135 58.3126 12.5312 59.1199 12.5312C59.8361 12.5312 60.4839 12.6842 61.0633 12.9902C61.6492 13.2962 62.1147 13.752 62.4598 14.3574C62.8048 14.9564 62.9773 15.7018 62.9773 16.5938V23H60.8875V16.8477C60.8875 16.0273 60.6727 15.4056 60.243 14.9824C59.8198 14.5592 59.2469 14.3477 58.5242 14.3477C58.062 14.3477 57.6421 14.4421 57.2645 14.6309C56.8934 14.8197 56.5971 15.1126 56.3758 15.5098C56.1544 15.9069 56.0438 16.418 56.0438 17.043ZM66.6789 8.625V23H64.5793V8.625H66.6789ZM71.5426 23.1465C70.859 23.1465 70.247 23.0326 69.7066 22.8047C69.1728 22.5703 68.7496 22.2253 68.4371 21.7695C68.1246 21.3073 67.9684 20.7344 67.9684 20.0508C67.9684 19.4648 68.079 18.9831 68.3004 18.6055C68.5283 18.2279 68.8342 17.9284 69.2184 17.707C69.6025 17.4857 70.0387 17.3197 70.527 17.209C71.0152 17.0918 71.5198 17.0039 72.0406 16.9453C72.6917 16.8607 73.2027 16.7956 73.5738 16.75C73.9514 16.6979 74.2184 16.6198 74.3746 16.5156C74.5374 16.4049 74.6188 16.2259 74.6188 15.9785V15.9297C74.6188 15.4284 74.4365 15.0247 74.0719 14.7188C73.7138 14.4062 73.2092 14.25 72.5582 14.25C71.9202 14.25 71.3994 14.403 70.9957 14.709C70.5986 15.015 70.3772 15.4023 70.3316 15.8711H68.2223C68.2613 15.2331 68.4599 14.6634 68.818 14.1621C69.1826 13.6608 69.6839 13.2637 70.3219 12.9707C70.9599 12.6777 71.7119 12.5312 72.5777 12.5312C73.4241 12.5312 74.1565 12.6745 74.775 12.9609C75.3935 13.2474 75.8688 13.6445 76.2008 14.1523C76.5393 14.6602 76.7086 15.2526 76.7086 15.9297V23H74.6676V21.5352H74.6285C74.4788 21.8151 74.277 22.0788 74.023 22.3262C73.7691 22.5736 73.4404 22.7721 73.0367 22.9219C72.6331 23.0716 72.135 23.1465 71.5426 23.1465ZM71.9918 21.4766C72.5842 21.4766 73.0758 21.3724 73.4664 21.1641C73.8635 20.9492 74.1565 20.666 74.3453 20.3145C74.5341 19.9564 74.6285 19.5658 74.6285 19.1426V17.9512C74.4918 18.0553 74.1858 18.153 73.7105 18.2441C73.2353 18.3288 72.7242 18.4102 72.1773 18.4883C71.8063 18.5404 71.4579 18.6283 71.1324 18.752C70.8134 18.8691 70.553 19.0352 70.3512 19.25C70.1559 19.4583 70.0582 19.7383 70.0582 20.0898C70.0647 20.526 70.2405 20.8678 70.5855 21.1152C70.9306 21.3561 71.3994 21.4766 71.9918 21.4766ZM78.3008 27.2188V25.373H79.4141C79.6549 25.373 79.847 25.3405 79.9902 25.2754C80.1335 25.2103 80.2474 25.1159 80.332 24.9922C80.4167 24.8685 80.4915 24.7188 80.5566 24.543C80.5566 24.543 80.5827 24.4648 80.6348 24.3086C80.6868 24.1523 80.7487 23.9733 80.8203 23.7715C80.8919 23.5697 80.9538 23.3906 81.0059 23.2344C81.0645 23.0781 81.0938 23 81.0938 23L77.1777 12.6875H79.4238L82.2168 20.5391H82.2559L85.0195 12.6875H87.2363L82.4121 25.4414C82.2624 25.832 82.0638 26.1576 81.8164 26.418C81.569 26.6849 81.2598 26.8835 80.8887 27.0137C80.5176 27.1504 80.0716 27.2188 79.5508 27.2188H78.3008ZM92.1488 23.1562C91.1592 23.1562 90.2999 22.9349 89.5707 22.4922C88.848 22.043 88.2849 21.4212 87.8812 20.627C87.4841 19.8327 87.2855 18.9115 87.2855 17.8633C87.2855 16.8151 87.4809 15.8906 87.8715 15.0898C88.2686 14.2891 88.8285 13.6641 89.5512 13.2148C90.2738 12.7591 91.1234 12.5312 92.1 12.5312C93.0701 12.5312 93.9034 12.7559 94.6 13.2051C95.3031 13.6543 95.8402 14.2793 96.2113 15.0801C96.5824 15.8809 96.768 16.8053 96.768 17.8535V18.3906H88.2328V16.8574H94.727C94.7139 16.3366 94.5902 15.8809 94.3559 15.4902C94.1215 15.0996 93.8057 14.7936 93.4086 14.5723C93.018 14.3509 92.5753 14.2402 92.0805 14.2402C91.5271 14.2402 91.0486 14.3737 90.6449 14.6406C90.2413 14.9076 89.932 15.2591 89.7172 15.6953C89.5023 16.125 89.3949 16.584 89.3949 17.0723V18.3711C89.3884 18.931 89.4958 19.4453 89.7172 19.9141C89.9385 20.3763 90.2543 20.7474 90.6645 21.0273C91.0811 21.3008 91.5792 21.4375 92.1586 21.4375C92.5492 21.4375 92.9138 21.3724 93.2523 21.2422C93.5909 21.1055 93.8806 20.9167 94.1215 20.6758C94.3624 20.4349 94.5316 20.1549 94.6293 19.8359H96.641C96.5108 20.5 96.2374 21.0827 95.8207 21.584C95.4105 22.0788 94.8897 22.4661 94.2582 22.7461C93.6267 23.0195 92.9236 23.1562 92.1488 23.1562ZM97.9402 23V12.6875H99.9422V14.3867H100.001C100.19 13.8138 100.489 13.3613 100.899 13.0293C101.316 12.6973 101.84 12.5312 102.471 12.5312C102.628 12.5312 102.771 12.541 102.901 12.5605C103.038 12.5736 103.149 12.5898 103.233 12.6094V14.6016C103.142 14.569 102.992 14.5397 102.784 14.5137C102.582 14.4811 102.364 14.4648 102.13 14.4648C101.752 14.4648 101.404 14.5527 101.085 14.7285C100.766 14.8978 100.509 15.1615 100.313 15.5195C100.124 15.8776 100.03 16.3333 100.03 16.8867V23H97.9402Z" fill="currentColor"/></svg>`;
+document.getElementById("navLogo").innerHTML = LOGO_SVG;
+document.getElementById("footLogo").innerHTML = LOGO_SVG;
+
+const checklist = document.querySelector(".checklist");
+checklist.addEventListener("click", e=>{
+  if(e.target.closest("a")) return;
+  const li = e.target.closest("li");
+  if(li) li.classList.toggle("checked");
+});
+
+// In-page anchors (nav + hero CTAs): scroll via JS so they work inside the artifact iframe.
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener("click", e=>{
+    const el = document.getElementById(a.getAttribute("href").slice(1));
+    if(el){ e.preventDefault(); el.scrollIntoView({behavior:"smooth", block:"start"}); }
+  });
+});
+</script>
+</body>
+</html>
